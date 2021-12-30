@@ -11,27 +11,26 @@ body {
     margin: 0;
 }
 
-.container {
+/* Day1 - Expanding Cards */
+expanding-cards {
     display: flex;
-    width: 80vw;
+    width: 80%;
+    height: inherit;
 }
-
-.panel {
+expanding-cards .card {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    width: 20%;
-    height: 80vh;
-    border-radius: 50px;
-    color: white;
+    border-radius: 20px;
+    height: 80%;
+    color: #fff;
     cursor: pointer;
     flex: 0.5;
     margin: 10px;
     position: relative;
-    transition: flex 0.7s ease-in;
+    transition: flex 0.5s ease-in;
 }
-
-.panel h3 {
+expanding-cards .card h3 {
     font-size: 24px;
     position: absolute;
     bottom: 20px;
@@ -39,12 +38,10 @@ body {
     margin: 0;
     opacity: 0;
 }
-
-.panel.active {
+expanding-cards .card.active {
     flex: 5;
 }
-
-.panel.active h3 {
+expanding-cards .card.active h3 {
     opacity: 1;
     transition: opacity 0.3s ease-in 0.4s;
 }
