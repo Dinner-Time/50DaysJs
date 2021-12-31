@@ -1,3 +1,8 @@
+:root {
+    --progress-steps-empty: #e0e0e0;
+    --progress-steps-fill: #3498db;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -42,4 +47,78 @@ expanding-cards .card.active {
 expanding-cards .card.active h3 {
     opacity: 1;
     transition: opacity 0.3s ease-in 0.4s;
+}
+
+/* Day2 - Progress Steps */
+progress-steps {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+progress-steps .progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+}
+progress-steps .progress-container::before {
+    content: '';
+    background-color: var(--progress-steps-empty);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+progress-steps .progress-container .line {
+    background-color: var(--progress-steps-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: 0.4s ease;
+}
+progress-steps .progress-container .circle {
+    background-color: #fff;
+    color: #999;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--progress-steps-empty);
+    transition: 0.4s ease;
+}
+progress-steps .progress-container .circle.active {
+    border-color: var(--progress-steps-fill);
+}
+progress-steps .button-container button {
+    background-color: var(--progress-steps-fill);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px 30px;
+    margin: 5px;
+    font-size: 14px;
+}
+progress-steps .button-container button:active {
+    transform: scale(0.98);
+}
+progress-steps .button-container button:focus {
+    outline: 0;
+}
+progress-steps .button-container button:disabled {
+    background-color: var(--progress-steps-empty);
+    cursor: not-allowed;
 }
