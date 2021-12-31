@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --progress-empty: #e0e0e0;
+    --progress-fill: #3498db;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.container .progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+}
+
+.container .progress-container::before {
+    content: '';
+    background-color: var(--progress-empty);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+.container .progress-container .line {
+    background-color: var(--progress-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: 0.4s ease;
+}
+
+.container .progress-container .circle {
+    background-color: #fff;
+    color: #999;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--progress-empty);
+    transition: 0.4s ease;
+}
+
+.container .progress-container .circle.active {
+    border-color: var(--progress-fill);
+}
+
+.container .button-container button {
+    background-color: var(--progress-fill);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px 30px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.container .button-container button:active {
+    transform: scale(0.98);
+}
+
+.container .button-container button:focus {
+    outline: 0;
+}
+
+.container .button-container button:disabled {
+    background-color: var(--progress-empty);
+    cursor: not-allowed;
+}
