@@ -223,3 +223,5 @@ class ProgressSteps extends HTMLElement {
     }
 }
 window.customElements.define('progress-steps', ProgressSteps);
+
+// Day 3 - Rotating Navigation
