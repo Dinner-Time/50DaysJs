@@ -225,3 +225,118 @@ class ProgressSteps extends HTMLElement {
 window.customElements.define('progress-steps', ProgressSteps);
 
 // Day 3 - Rotating Navigation
+class RotatingNavigation extends HTMLElement {
+    // 생성자 에서는 보통 해당 엘리먼트에 포함된 함수를 초기화 한다.
+    constructor() {
+        super();
+    }
+    // 커스텀 엘리먼트가 생성될때 실행된다.
+    connectedCallback() {
+        this.render();
+    }
+    // 해당요소가 새로운 문서로 이동 될 때마다 호출 된다.
+    adoptCallback() {}
+    // 요소의 속성이 추가, 제거, 업데이트, 교체되는 부분을 관찰하고 호출된다.
+    // 이때 observedAttributes 속성에 나열된 특성에서만 호출된다.
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        if (attrName !== 'title') this[attrName] = newVal;
+    }
+    //attributeChangedCallback 에서 관찰하는 항목을 리턴한다.
+    static get observedAttributes() {
+        return ['title', 'writer'];
+    }
+    // custom element 가 제거될때 호출된다.
+    disconnectedCallback() {
+        alert('bye bye');
+    }
+    // custom method
+    render() {
+        // innerText init
+        const innerText = this.innerText;
+        this.innerText = '';
+
+        // content
+        const content = document.createElement('div');
+        content.classList = 'content';
+
+        const circle = document.createElement('div');
+        circle.classList = 'circle';
+
+        for (let i = 0; i < 2; i++) {
+            const button = document.createElement('button');
+            const fontAwesome = document.createElement('i');
+            switch (i) {
+                case 0: {
+                    button.classList = 'close';
+                    fontAwesome.classList = 'fas fa-times';
+                    button.addEventListener('click', () => content.classList.remove('show-nav'));
+                    break;
+                }
+                case 1: {
+                    button.classList = 'open';
+                    fontAwesome.classList = 'fas fa-bars';
+                    button.addEventListener('click', () => content.classList.add('show-nav'));
+                    break;
+                }
+            }
+
+            button.appendChild(fontAwesome);
+            circle.appendChild(button);
+        }
+        content.appendChild(circle);
+
+        // article
+        const article = document.createElement('article');
+        const h1 = document.createElement('h1');
+        h1.innerHTML = this.title;
+        article.appendChild(h1);
+
+        const small = document.createElement('small');
+        small.innerHTML = this.writer;
+        article.appendChild(small);
+
+        const p = document.createElement('p');
+        p.innerHTML = innerText;
+        article.appendChild(p);
+
+        content.appendChild(article);
+
+        this.appendChild(content);
+
+        // nav
+        const nav = document.createElement('nav');
+        const ul = document.createElement('ul');
+
+        for (let i = 0; i < 3; i++) {
+            const li = document.createElement('li');
+            const fontAwesome = document.createElement('i');
+            let text;
+            switch (i) {
+                case 0: {
+                    fontAwesome.classList = 'fas fa-home';
+                    text = document.createTextNode(' Home');
+                    break;
+                }
+                case 1: {
+                    fontAwesome.classList = 'fas fa-user-alt';
+                    text = document.createTextNode(' About');
+                    break;
+                }
+                case 2: {
+                    fontAwesome.classList = 'fas fa-envelope';
+                    text = document.createTextNode(' Contact');
+                    break;
+                }
+            }
+
+            li.appendChild(fontAwesome);
+            li.appendChild(text);
+
+            ul.appendChild(li);
+        }
+        nav.appendChild(ul);
+
+        this.appendChild(nav);
+    }
+}
+window.customElements.define('rotating-navigation', RotatingNavigation);
